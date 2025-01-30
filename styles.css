@@ -1,0 +1,66 @@
+/* Definimos la tipografia que utilizaremos */
+@import url('https://fonts.googleapis.com/css2?family=Keania+One&display=swap');
+
+/* Definimos las variables (ROOT) */
+:root {
+  --primary-color: #00ff00;
+  --background-dark: #1a1a1a;
+  --background-medium: #2a2a2a;
+  --border-light: #3a3a3a;
+  --border-dark: #222;
+  --cell-size: 35px;
+  --spacing-small: 8px;
+  --spacing-medium: 15px;
+}
+
+/* Reseteamos los estilos */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Keania One";
+  background-color: var(--background-dark);
+  color: var(--primary-color);
+  line-height: 1.6;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  padding: var(--spacing-medium);
+}
+
+main {
+  background-color: var(--background-medium);
+  border: 3px solid;
+  /* Usamos 2 tipos de colores de borde para dar la sensacion de un juego Arcade */
+  border-color: var(--border-light) var(--border-dark) var(--border-dark) var(--border-light);
+  padding: var(--spacing-medium);
+  max-width: 600px;
+  width: 100%;
+}
+
+/* Estilos del HEADER */
+header {
+  background: var(--background-dark);
+  padding: var(--spacing-medium);
+  text-align: center;
+  border: 2px solid var(--primary-color);
+}
+
+/* Estilos para los H1 */
+h1 {
+  font-size: 1.5em;
+  letter-spacing: 2px;
+  text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+}
+
+/* Estilos para las Sections */
+section {
+  border: 2px solid var(--primary-color);
+  padding: var(--spacing-medium);
+  margin-bottom: var(--spacing-medium);
+  background: var(--background-dark);
+}
+
