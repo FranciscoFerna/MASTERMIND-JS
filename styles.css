@@ -64,3 +64,81 @@ section {
   background: var(--background-dark);
 }
 
+/* Código secreto */
+.secret-code {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-small);
+  list-style: none;
+}
+
+/* Panel de selección de colores */
+.color-palette {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-small);
+  margin-bottom: var(--spacing-medium);
+}
+
+.current-guess {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-small);
+  margin: var(--spacing-medium) 0;
+}
+
+/* Historial de intentos */
+.attempts-history {
+  list-style: none;
+}
+
+/* Elementos comunes */
+.cell {
+  width: var(--cell-size);
+  height: var(--cell-size);
+  border: 2px solid var(--primary-color);
+  background-color: var(--background-medium);
+}
+
+.color-option {
+  width: var(--cell-size);
+  height: var(--cell-size);
+  border: 2px solid var(--primary-color);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.color-option:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+button {
+  display: block;
+  margin: var(--spacing-medium) auto;
+  padding: 8px 20px;
+  background-color: var(--background-dark);
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+  font-family: inherit;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+button:hover {
+  color: var(--background-dark);
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+/* Colores del juego */
+.white { background-color: #ffffff; }
+.blue { background-color: #0000ff; }
+.green { background-color: #00ff00; }
+.violet { background-color: #ff00ff; }
+.yellow { background-color: #ffff00; }
+.red { background-color: #ff0000; }
+.orange { background-color: #ffa500; }
+.cyan { background-color: #00ffff; }
