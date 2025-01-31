@@ -134,11 +134,34 @@ button:hover {
 }
 
 /* Colores del juego */
-.white { background-color: #ffffff; }
-.blue { background-color: #0000ff; }
-.green { background-color: #00ff00; }
-.violet { background-color: #ff00ff; }
-.yellow { background-color: #ffff00; }
-.red { background-color: #ff0000; }
-.orange { background-color: #ffa500; }
-.cyan { background-color: #00ffff; }
+.white {
+  background-color: #ffffff;
+}
+
+.blue {
+  background-color: #0000ff;
+}
+
+.green {
+  background-color: #00ff00;
+}
+
+.violet {
+  background-color: #ff00ff;
+}
+
+.yellow {
+  background-color: #ffff00;
+}
+
+.red {
+  background-color: #ff0000;
+}
+
+.orange {
+  background-color: #ffa500;
+}
+
+.cyan {
+  background-color: #00ffff;
+}
