@@ -20,9 +20,27 @@ function comenzarJuego() {
     intentoActual = [];
     numeroIntentos = 0;
 
-    // Funcion a implementar
     limpiarTablero()
 
     let mensaje = document.querySelector('[role="status"]');
     mensaje.textContent = 'Selecciona 4 colores para comenzar el juego'
 }
+
+function limpiarTablero() {
+    // Limpiamos el intento actual
+    let casillasIntento = document.querySelectorAll('.current-guess .cell');
+    for (let casilla of casillasIntento) {
+        casilla.className = 'cell';
+    }
+
+    // Limpiar Historial
+    let historial = docuemnt.querySelector('.attempts-history');
+    historial.innerHTML = '';
+
+    // Ocultamos el codigo secreto
+    let casillasCodigo = document.querySelectorAll('.secret-code .cell');
+    for (let casilla of casillasCodigo) {
+        casilla.className = 'cell';
+    }
+}
+
