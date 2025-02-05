@@ -11,7 +11,7 @@ const COLORES = ['white', 'blue', 'green', 'violet', 'yellow', 'red', 'orange', 
 function comenzarJuego() {
     // Generamos el codigo secreto aleatorio  
     codigoSecreto = [];
-    for (let i = 0; i < 4, i++) {
+    for(let i = 0; i < 4; i++) {
         let colorAleatorio = COLORES[Math.floor(Math.random() * COLORES.length)];
         codigoSecreto.push(colorAleatorio);
     }
@@ -43,4 +43,25 @@ function limpiarTablero() {
         casilla.className = 'cell';
     }
 }
+
+// Funcion para seleccionar el color
+function seleccionarColor(color) {
+    if (intentoActual.length < 4) {
+        intentoActual.push(color);
+
+        // Mostramos el color seleccionado
+        let casillas = document.querySelector('[role="status"]');
+        casillas[intentoActual.length - 1].className = 'cell ' + color;
+
+        // Actualizamos el mensaje
+        let mensaje = document.querySelectorAll('[role="status"]');
+        if (intentoActual.length === 4) {
+            mensaje.textContent = 'Pulsa "Comprobar combinacion" para validar.';
+        } else {
+            mensaje.textContent = `Selecciona ${4 - intentoActual.length} colores mas.`;
+        }
+    }
+}
+
+
 
