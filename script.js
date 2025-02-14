@@ -9,7 +9,7 @@ const COLORES = ['white', 'blue', 'green', 'violet', 'yellow', 'red', 'orange', 
 
 // Funcion para comenzar un nuevo juego
 function comenzarJuego() {
-    // Generamos el codigo secreto aleatorio  
+    // Generamos el codigo secreto aleatorio
     codigoSecreto = [];
     for(let i = 0; i < 4; i++) {
         let colorAleatorio = COLORES[Math.floor(Math.random() * COLORES.length)];
@@ -63,5 +63,71 @@ function seleccionarColor(color) {
     }
 }
 
+// Función para validar el intento del usuario
+function validaColoresUsuario() {
+    // Comprobamos que se han seleccionado 4 colores
+    if (intentoActual.length !== 4) {
+        alert('Debes seleccionar 4 colores antes de comprobar');
+        return;
+    }
+
+    numeroIntentos++
+
+    // Contamos aciertos exactos y colores correctos
+    let exactos = 0;
+    let coloresCorrectos = 0;
+
+    // Copias de los arrays para no modificar los originales
+    let codigoCopia = [...codigoSecreto];
+    let intentoCopia = [...intentoActual];
+
+    // Primero contaremos los aciertos exactos
+    for (let i = 0; i < 4; i++) {
+        if (intentoCopia[i] === codigoCopia[i]) {
+            exactos++;
+            // Marcar como usado
+            codigoCopia[i] = null;
+            intentoCopia[i] = null
+        }
+    }
+
+    // Luego contamos colores correctos en posicion incorrecta
+    for (let i = 0; i < 4; i++) {
+        if (intentoCopia[i] !== null) {
+            let posicion = codigoCopia.indexOf(intentoCopia[i]);
+            if (posicion !== -1) {
+                coloresCorrectos++;
+                codigoCopia[posicion] = null
+            }
+        }
+    }
+
+    // Añadimos el intento al historial
+    agregarIntentoAlHistorial(exactos, coloresCorrectos);
+
+    // Comprobamos si ha ganado
+    if (exactos === 4) {
+        finalizarJuegoGanado();
+        return;
+    }
+
+    // Comprobamos si ha perdido
+    if (numeroIntentos >= MAXIMO_INTENTOS) {
+        finalizarJuegoPerdido();
+        return;
+    }
+
+    //Preparamos el siguiente intento
+    intentoActual = [];
+    let casillas = document.querySelectorAll('.current-guess .cell');
+    for (let casilla of casillas) {
+        casilla.className = 'cell'
+    }
+
+
+    // Actualizamos el mensaje
+    let mensaje = document.querySelector('[role="status"]');
+    mensaje.textContent = `Intento ${numeroIntentos} de ${MAXIMO_INTENTOS}. Selecciona tu proxima combinacion.`;
+}
 
 
