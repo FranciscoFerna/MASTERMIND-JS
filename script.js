@@ -131,3 +131,21 @@ function validaColoresUsuario() {
 }
 
 
+// Funcion para agregar un intento al historial
+function agregarIntentoAlHistorial(exactos, coloresCorrectos) {
+    let historial = document.querySelector('.attempts-history');
+    
+    // Creamos nueva fila de intento
+    let fila = document.createElement('li');
+    fila.className = 'attempt-row';
+    
+    // Añadir colores del intento
+    let contenedorColores = document.createElement('ul');
+    contenedorColores.className = 'attempt-colors';
+    
+    for(let color of intentoActual) {
+        let casilla = document.createElement('li');
+        casilla.className = 'cell ' + color;
+        contenedorColores.appendChild(casilla);
+    }
+}
