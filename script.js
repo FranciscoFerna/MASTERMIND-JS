@@ -7,6 +7,27 @@ const MAXIMO_INTENTOS = 10
 // Lista de colores disponibles
 const COLORES = ['white', 'blue', 'green', 'violet', 'yellow', 'red', 'orange', 'cyan'];
 
+// Esperamos a que cargue la pagina para empezar
+window.onload = function() {
+    // Iniciamos el juego
+    comenzarJuego();
+    
+    // Añadimos los event listeners a los botones de colores
+    let botonesColores = document.querySelectorAll('.color-option');
+    for(let boton of botonesColores) {
+        boton.onclick = function() {
+            // Cuando hacemos click, cogemos el segundo nombre de clase que es el color
+            let color = boton.classList[1];
+            seleccionarColor(color);
+        }
+    }
+
+    
+    let botonComprobar = document.querySelector('section button[type="button"]');
+    botonComprobar.textContent = 'Comprobar combinación'; 
+    botonComprobar.onclick = validaColoresUsuario;
+}
+
 // Funcion para comenzar un nuevo juego
 function comenzarJuego() {
     // Generamos el codigo secreto aleatorio
@@ -34,7 +55,7 @@ function limpiarTablero() {
     }
 
     // Limpiar Historial
-    let historial = docuemnt.querySelector('.attempts-history');
+    let historial = document.querySelector('.attempts-history'); // Corregido el error de typo en document
     historial.innerHTML = '';
 
     // Ocultamos el codigo secreto
@@ -50,11 +71,11 @@ function seleccionarColor(color) {
         intentoActual.push(color);
 
         // Mostramos el color seleccionado
-        let casillas = document.querySelector('[role="status"]');
+        let casillas = document.querySelectorAll('.current-guess .cell'); // Corregido el selector
         casillas[intentoActual.length - 1].className = 'cell ' + color;
 
         // Actualizamos el mensaje
-        let mensaje = document.querySelectorAll('[role="status"]');
+        let mensaje = document.querySelector('[role="status"]'); // Corregido para seleccionar solo uno
         if (intentoActual.length === 4) {
             mensaje.textContent = 'Pulsa "Comprobar combinacion" para validar.';
         } else {
@@ -63,7 +84,6 @@ function seleccionarColor(color) {
     }
 }
 
-// Función para validar el intento del usuario
 function validaColoresUsuario() {
     // Comprobamos que se han seleccionado 4 colores
     if (intentoActual.length !== 4) {
@@ -124,7 +144,6 @@ function validaColoresUsuario() {
         casilla.className = 'cell'
     }
 
-
     // Actualizamos el mensaje
     let mensaje = document.querySelector('[role="status"]');
     mensaje.textContent = `Intento ${numeroIntentos} de ${MAXIMO_INTENTOS}. Selecciona tu proxima combinacion.`;
@@ -143,16 +162,16 @@ function agregarIntentoAlHistorial(exactos, coloresCorrectos) {
     let contenedorColores = document.createElement('ul');
     contenedorColores.className = 'attempt-colors';
     
+    // Añadimos cada color del intento
     for(let color of intentoActual) {
         let casilla = document.createElement('li');
         casilla.className = 'cell ' + color;
         contenedorColores.appendChild(casilla);
     }
-    // Añadir pistas (feedback)
+
     let contenedorPistas = document.createElement('ul');
     contenedorPistas.className = 'feedback';
     
-    // Añadir pistas negras (aciertos exactos)
     for(let i = 0; i < exactos; i++) {
         let pista = document.createElement('li');
         pista.className = 'feedback-peg';
@@ -160,7 +179,6 @@ function agregarIntentoAlHistorial(exactos, coloresCorrectos) {
         contenedorPistas.appendChild(pista);
     }
     
-    // Añadir pistas blancas (colores correctos)
     for(let i = 0; i < coloresCorrectos; i++) {
         let pista = document.createElement('li');
         pista.className = 'feedback-peg';
@@ -168,7 +186,6 @@ function agregarIntentoAlHistorial(exactos, coloresCorrectos) {
         contenedorPistas.appendChild(pista);
     }
     
-    // Añadir espacios vacíos
     for(let i = 0; i < (4 - exactos - coloresCorrectos); i++) {
         let pista = document.createElement('li');
         pista.className = 'feedback-peg';
@@ -177,5 +194,39 @@ function agregarIntentoAlHistorial(exactos, coloresCorrectos) {
     
     fila.appendChild(contenedorColores);
     fila.appendChild(contenedorPistas);
+    
     historial.insertBefore(fila, historial.firstChild);
+}
+
+
+// Funcion para finalizar el juego cuando gana
+function finalizarJuegoGanado() {
+    mostrarCodigoSecreto();
+    let mensaje = document.querySelector('[role="status"]');
+    mensaje.textContent = '¡Felicidades! Has descubierto el código secreto.';
+    agregarBotonNuevoJuego();
+}
+
+// Funcion para finalizar el juego cuando pierde
+function finalizarJuegoPerdido() {
+    mostrarCodigoSecreto();
+    let mensaje = document.querySelector('[role="status"]');
+    mensaje.textContent = 'Juego terminado. No has logrado descubrir el código secreto.';
+    agregarBotonNuevoJuego();
+}
+
+// Funcion para mostrar el codigo secreto
+function mostrarCodigoSecreto() {
+    let casillas = document.querySelectorAll('.secret-code .cell');
+    for(let i = 0; i < codigoSecreto.length; i++) {
+        casillas[i].className = 'cell ' + codigoSecreto[i];
+    }
+}
+
+// Funcion para agregar el botón de nuevo juego
+function agregarBotonNuevoJuego() {
+    let boton = document.createElement('button');
+    boton.textContent = 'Nueva partida';
+    boton.onclick = comenzarJuego;
+    document.querySelector('section[aria-label="Información del juego"]').appendChild(boton);
 }

@@ -21,12 +21,13 @@
 }
 
 body {
-  font-family: "Keania One";
+  font-family: "Keania One", sans-serif;
   background-color: var(--background-dark);
   color: var(--primary-color);
   line-height: 1.6;
   display: flex;
   justify-content: center;
+  align-items: center;
   min-height: 100vh;
   padding: var(--spacing-medium);
 }
@@ -34,7 +35,6 @@ body {
 main {
   background-color: var(--background-medium);
   border: 3px solid;
-  /* Usamos 2 tipos de colores de borde para dar la sensacion de un juego Arcade */
   border-color: var(--border-light) var(--border-dark) var(--border-dark) var(--border-light);
   padding: var(--spacing-medium);
   max-width: 600px;
@@ -47,11 +47,12 @@ header {
   padding: var(--spacing-medium);
   text-align: center;
   border: 2px solid var(--primary-color);
+  margin-bottom: var(--spacing-medium);
 }
 
 /* Estilos para los H1 */
 h1 {
-  font-size: 1.5em;
+  font-size: 2em;
   letter-spacing: 2px;
   text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
 }
@@ -70,6 +71,7 @@ section {
   justify-content: center;
   gap: var(--spacing-small);
   list-style: none;
+  margin: var(--spacing-small) 0;
 }
 
 /* Panel de selección de colores */
@@ -77,8 +79,9 @@ section {
   list-style: none;
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   gap: var(--spacing-small);
-  margin-bottom: var(--spacing-medium);
+  margin: var(--spacing-medium) 0;
 }
 
 .current-guess {
@@ -89,30 +92,74 @@ section {
   margin: var(--spacing-medium) 0;
 }
 
-/* Historial de intentos */
 .attempts-history {
   list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-small);
+  padding: var(--spacing-small);
+  max-height: 300px;
+  overflow-y: auto;
 }
 
-/* Elementos comunes */
+.attempt-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+  gap: var(--spacing-medium); 
+}
+
+.attempt-row ul {
+  padding: 0;
+  margin: 0;
+}
+
+.attempt-colors {
+  display: flex; 
+  gap: var(--spacing-small);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.feedback {
+  display: flex; 
+  gap: var(--spacing-small);
+  justify-content: flex-start; 
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
 .cell {
   width: var(--cell-size);
   height: var(--cell-size);
   border: 2px solid var(--primary-color);
   background-color: var(--background-medium);
+  border-radius: 4px;
 }
+
+.feedback-peg {
+  width: calc(var(--cell-size) / 2);
+  height: calc(var(--cell-size) / 2);
+  border: 1px solid var(--primary-color);
+  border-radius: 50%; /* Forma circular */
+  background-color: var(--background-medium);
+}
+
 
 .color-option {
   width: var(--cell-size);
   height: var(--cell-size);
   border: 2px solid var(--primary-color);
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
+  border-radius: 4px;
+  transition: transform 0.2s;
 }
 
 .color-option:hover {
   transform: scale(1.1);
-  box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+  box-shadow: 0 0 10px (0, 255, 0, 0.5);
 }
 
 button {
@@ -130,38 +177,28 @@ button {
 
 button:hover {
   color: var(--background-dark);
-  box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+  box-shadow: 0 0 10px ;
+}
+
+/* Ocultar visualmente */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }
 
 /* Colores del juego */
-.white {
-  background-color: #ffffff;
-}
+.white { background-color: #ffffff; }
+.blue { background-color: #0000ff; }
+.green { background-color: #00ff00; }
+.violet { background-color: #ff00ff; }
+.yellow { background-color: #ffff00; }
+.red { background-color: #ff0000; }
+.orange { background-color: #ffa500; }
+.cyan { background-color: #00ffff; }
 
-.blue {
-  background-color: #0000ff;
-}
-
-.green {
-  background-color: #00ff00;
-}
-
-.violet {
-  background-color: #ff00ff;
-}
-
-.yellow {
-  background-color: #ffff00;
-}
-
-.red {
-  background-color: #ff0000;
-}
-
-.orange {
-  background-color: #ffa500;
-}
-
-.cyan {
-  background-color: #00ffff;
-}

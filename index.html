@@ -1,66 +1,106 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-  <!-- MetaTAGS - Aun por definir -->
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
-  <script src="script.js" defer></script>
-  <title>MASTERMIND</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Juego Mastermind - Adivina el código secreto">
+    <meta name="keywords" content="mastermind, juego, lógica, códigos, colores">
+    <meta name="author" content="Tu Nombre">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+    <title>MASTERMIND</title>
 </head>
 <body>
-  <main>
-    <header>
-      <h1>MASTERMIND</h1>
-    </header>
+    <main>
+        <header>
+            <h1>MASTERMIND</h1>
+        </header>
 
-    <!-- SectionMasterMind -> Codigo Secreto -->
-     <section">
-      <h2>Código Secreto</h2>
-      <ul class="secret-code">
-        <li class="cell"></li>
-        <li class="cell"></li>
-        <li class="cell"></li>
-        <li class="cell"></li>
-      </ul>
-     </section>
+        <!-- Sección del código secreto -->
+        <section aria-label="Código Secreto">
+            <h2>Código Secreto</h2>
+            <ul class="secret-code" role="list">
+                <li class="cell" aria-label="Posición 1 del código secreto"></li>
+                <li class="cell" aria-label="Posición 2 del código secreto"></li>
+                <li class="cell" aria-label="Posición 3 del código secreto"></li>
+                <li class="cell" aria-label="Posición 4 del código secreto"></li>
+            </ul>
+        </section>
 
-     <!-- SectionPickerColor -> Seleccionar Color -->
-      <section>
-        <h2>Seleccion de colores</h2>
-        <ul class="color-palette" role="listbox">
-        <li><button class="color-option white"></button></li>
-        <li><button class="color-option blue" "></button></li>
-        <li><button class="color-option green"></button></li>
-        <li><button class="color-option violet"></button></li>
-        <li><button class="color-option yellow"></button></li>
-        <li><button class="color-option red"></li>
-        <li><button class="color-option orange"></button></li>
-        <li><button class="color-option cyan"></button></li>
-        </ul>
+        <!-- Sección de selección de colores -->
+        <section aria-label="Selección de colores">
+            <h2>Selección de colores</h2>
+            <ul class="color-palette" role="listbox" aria-label="Paleta de colores disponibles">
+                <li>
+                    <button class="color-option white" aria-label="Seleccionar color blanco"></button>
+                </li>
+                <li>
+                    <button class="color-option blue" aria-label="Seleccionar color azul"></button>
+                </li>
+                <li>
+                    <button class="color-option green" aria-label="Seleccionar color verde"></button>
+                </li>
+                <li>
+                    <button class="color-option violet" aria-label="Seleccionar color violeta"></button>
+                </li>
+                <li>
+                    <button class="color-option yellow" aria-label="Seleccionar color amarillo"></button>
+                </li>
+                <li>
+                    <button class="color-option red" aria-label="Seleccionar color rojo"></button>
+                </li>
+                <li>
+                    <button class="color-option orange" aria-label="Seleccionar color naranja"></button>
+                </li>
+                <li>
+                    <button class="color-option cyan" aria-label="Seleccionar color cyan"></button>
+                </li>
+            </ul>
 
-        <ul class="current-guess" role="list" n actual">
-          <li class="cell"></li>
-          <li class="cell"></li>
-          <li class="cell"></li>
-          <li class="cell"></li>
-        </ul>
-        <button type="button" onclick="/* Function a implementar */"></button>
-      </section>
+            <div class="current-attempt">
+                <h3 class="visually-hidden">Intento actual</h3>
+                <ul class="current-guess" role="list" aria-label="Combinación actual">
+                    <li class="cell" aria-label="Posición 1 del intento actual"></li>
+                    <li class="cell" aria-label="Posición 2 del intento actual"></li>
+                    <li class="cell" aria-label="Posición 3 del intento actual"></li>
+                    <li class="cell" aria-label="Posición 4 del intento actual"></li>
+                </ul>
+                <button type="button" class="check-button" aria-label="Comprobar combinación">
+                    Comprobar combinación
+                </button>
+            </div>
+        </section>
 
-      <!-- SectionInformations -> Seccion de informacion -->
-      <section>
-        <h2 class="visually-hidden">Estado del Juego</h2>
-        <p role="status">Selecciona 4 colores para comenzar el juego.</p>
-    </section>
+        <!-- Sección de información del juego -->
+        <section aria-label="Información del juego">
+            <h2 class="visually-hidden">Estado del Juego</h2>
+            <p role="status" aria-live="polite">
+                Selecciona 4 colores para comenzar el juego
+            </p>
+            <div class="game-controls"></div>
+        </section>
 
-      <!-- SectionResults -> Seccion de resultados -->
-      <section>
-        <h2 class="visually-hidden">Intentos Anteriores</h2>
-        <ul class="attempts-history" role="log">
-          <!-- Las filas las crearemos dinamicamente con JavaScript -->
-        </ul>
-      </section>
-  </main>
+        <!-- Sección de historial de intentos -->
+        <section aria-label="Historial de intentos">
+            <h2 class="visually-hidden">Intentos Anteriores</h2>
+            <ul class="attempts-history" role="log" aria-live="polite">
+                <!-- Las filas se crearán dinámicamente con JavaScript -->
+            </ul>
+        </section>
+
+        <!-- Sección de instrucciones -->
+        <section aria-label="Instrucciones del juego" class="instructions">
+            <h2>Cómo jugar</h2>
+            <ul>
+                <li>Selecciona 4 colores para formar tu combinación</li>
+                <li>Pulsa "Comprobar combinación" para validar tu intento</li>
+                <li>Las pistas negras indican color y posición correctos</li>
+                <li>Las pistas blancas indican color correcto en posición incorrecta</li>
+                <li>Tienes 10 intentos para adivinar el código secreto</li>
+            </ul>
+        </section>
+    </main>
+
+
 </body>
 </html>
