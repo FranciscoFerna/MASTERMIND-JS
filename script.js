@@ -148,4 +148,34 @@ function agregarIntentoAlHistorial(exactos, coloresCorrectos) {
         casilla.className = 'cell ' + color;
         contenedorColores.appendChild(casilla);
     }
+    // Añadir pistas (feedback)
+    let contenedorPistas = document.createElement('ul');
+    contenedorPistas.className = 'feedback';
+    
+    // Añadir pistas negras (aciertos exactos)
+    for(let i = 0; i < exactos; i++) {
+        let pista = document.createElement('li');
+        pista.className = 'feedback-peg';
+        pista.style.backgroundColor = '#000';
+        contenedorPistas.appendChild(pista);
+    }
+    
+    // Añadir pistas blancas (colores correctos)
+    for(let i = 0; i < coloresCorrectos; i++) {
+        let pista = document.createElement('li');
+        pista.className = 'feedback-peg';
+        pista.style.backgroundColor = '#fff';
+        contenedorPistas.appendChild(pista);
+    }
+    
+    // Añadir espacios vacíos
+    for(let i = 0; i < (4 - exactos - coloresCorrectos); i++) {
+        let pista = document.createElement('li');
+        pista.className = 'feedback-peg';
+        contenedorPistas.appendChild(pista);
+    }
+    
+    fila.appendChild(contenedorColores);
+    fila.appendChild(contenedorPistas);
+    historial.insertBefore(fila, historial.firstChild);
 }
